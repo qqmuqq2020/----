@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>德卡管理系统</title>
+<link rel="stylesheet" href="../../css/style.css" type="text/css"></link>
+<link rel="stylesheet" href="../../css/public.css" type="text/css"></link>
+<link rel="stylesheet" href="../../css/uploadify.css" type="text/css"></link>
+<link rel="stylesheet" href="../../css/bomb_box.css" type="text/css"></link>
+<link rel="stylesheet" href="../../css/alert.css" type="text/css"></link>
+</head>
+<body style="background-color: #fff">
+
+	<section class="publicMian ">
+		<div class="right">
+			<div class="location">
+				<strong>你现在所在的位置是:</strong> <span>人员高级管理页面 >> 人员添加页面</span>
+			</div>
+			<div class="providerAdd" style="margin-right:-16%;">
+					<!--div的class 为error是验证错误，ok是验证成功-->
+					
+					<div>
+						<label for="StaffName">账户:</label> <input type="text"
+							name="staffname" value="" id="sname" onblur="checkName()" /> <font
+							color="red" id="position_err"></font>
+
+					</div>
+
+					
+					<div>
+						<label for="NativePlace">设置密码:</label> <input type="password"
+							name="staffpassword" value="" onblur="checkPwd()" /> <font
+							color="red" id="password_err"></font>
+
+					</div>
+					<div>
+						<label for="NowAddress">员工编号:</label> <input type="text"
+							name="nowaddress" value="" />
+
+					</div>
+					<!-- <div>
+						<label for="ContactWay">联系方式:</label> <input type="text"
+							name="contactway" value="" onblur="checkContactway()" /> <font
+							color="red" id="contactway_err"></font>
+
+					</div> -->
+
+					<!-- <div>
+						<label for="ICID">身份证号:</label> <input type="text" name="idcardno"
+							value="" onblur="checkIdcardno()" /> <font color="red"
+							id="idcardno_err"></font>
+
+					</div> -->
+					<div>
+						<label for="Position">公司职位:</label> <select name="positionid"
+							id="pos" onchange="ready()" >
+							<option value="">请选择职位</option>
+						</select> <font color="red" id="position_err"></font>
+					</div>
+					<div id="dread2" hidden="">
+					<label for="Position">发行员:</label> <select name="ready2"
+							id="read2" onchange="ifready2()">
+							<option value="">请选择</option>
+						</select> <font color="red" id="ready2_err"></font>
+					</div>
+					
+					
+				<!-- 	<div id="fun">
+						<label>给予权限:</label>
+					</div> -->
+					<div class="providerAddBtn">
+						<input type="button" name="add" id="add" onclick="register()"
+							value="保存"> <input type="button" id="back" name="back"
+							onclick="backtolist()" value="返回">
+					</div>
+
+			</div>
+		</div>
+
+	</section>
+	<div id="alert" class="alert">
+    	<span id="mas" class="mas"></span><br />
+        <span class="line">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+        <p id="info" class="info"></p>
+        <button id="but1" onclick="hide()" class="but1">确认</button><button id="but2"  onclick="hide()" class="but2">取消</button>
+    </div>
+    	<div id="a" class="a">
+    </div>
+    
+</body>
+<script type="text/javascript" src="../../js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../../js/jquery.uploadify.min.js"></script>
+<script type="text/javascript" src="../../js/jquery.uploadify.js"></script>
+<script type="text/javascript" src="../../ajaxJs/staffsAdd.js"></script>
+<script type="text/javascript" src="../../js/alert.js"></script>
+</html>
+

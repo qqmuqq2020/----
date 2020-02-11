@@ -1,0 +1,69 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-size: 12px;
+}
+a{
+    text-decoration: none;
+    color: #000;
+	
+}
+li{
+    list-style: none;
+}
+
+.exit:hover{
+    transform:rotate(180deg);
+    transition: all 0.6s;  
+    -ms-transform:rotate(180deg); 	/* IE 9 */
+    -moz-transform:rotate(180deg); 	/* Firefox */
+    -webkit-transform:rotate(180deg); /* Safari 和 Chrome */
+    -o-transform:rotate(180deg); 	/* Opera */
+     transform:rotate(180deg);
+}
+
+/*公共样式，头部*/
+.publicHeader{
+    height: 100px;
+    line-height: 15px;
+    font-size: 14px;
+}
+
+.topleft{padding-left:50px; padding-top:5px;float:left;}
+.topleft img{margin-top:12px; height:45px;}
+.topleft a span{color:#fff; font-size:36px;margin-left:10px;}
+.topright ul{padding-top:35px; float:right; padding-right:50px;}
+.topright ul li{float:left; padding-left:9px; padding-right:9px; }
+.topright ul li a{font-size:13px; color:#e9f2f7;}
+.topright ul li a:hover{color:red;}
+.topright ul li span{margin-top:2px;color:white;}
+
+.publicHeader h2{
+    float: left;
+    color: #fff;
+    font-size: 22px;
+    padding-left:80px;
+    text-shadow: 2px 1px #000;
+
+}
+/*时间*/
+.publicTime{
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+    background: linear-gradient(to bottom,#f5f9f8,#eef2fb,#e2ecf5,#e2ecf5,#e0edf6);
+    padding-left: 20px;
+    color: #808589;
+}
+#time{
+    float: left;
+    background: url("../images/time.png") 0 center no-repeat;
+    padding-left: 26px;
+}
+.publicTime a{
+    float: right;
+    margin-right: 50px;
+    color: #626367;
+}

@@ -1,0 +1,50 @@
+#drag{ 
+    position: relative;
+    background-color: #e8e8e8;
+    height: 3.5rem;
+  	width: 25rem;
+    line-height: 34px;
+    text-align: center;
+    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+#drag .handler{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 3.4rem;
+  	width: 3.4rem;
+    border: 1px solid #ccc;
+    cursor: move;
+    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+.handler_bg{
+	height: 3.5rem;
+    background: #fff url("../images/yzm2.png") no-repeat center;
+
+}
+.handler_ok_bg{
+    background: #fff url("../images/yzm.png") no-repeat center;
+}
+#drag .drag_bg{
+    background-color: #7ac23c;
+    height: 3.5rem;
+    width: 0px;
+}
+#drag .drag_text{
+    position: absolute;
+    top: 0rem;
+    width: 25rem;
+    font-size: 1.6rem;
+    font-weight: 300;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    -o-user-select:none;
+    -ms-user-select:none; 
+}

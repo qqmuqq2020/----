@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-size: 12px;
+}
+.clear:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+a{
+    text-decoration: none;
+    out-line: none;
+    color: #000;
+	
+}
+li{
+    list-style: none;
+}
+
+
+/*左边*/
+
+.left{
+    width: 168px;
+    background-color: #F2F2F2;
+    margin-right: 10px;
+    height: 100%;
+}
+.leftH2{
+    width: 140px;
+    height: 30px;
+    border-radius: 4px;
+    line-height: 30px;
+    text-align: center;
+    color: #fff;
+    background: #60b3e7;
+    margin: 10px  auto;
+    box-shadow:4px 4px rgba(212,212,212,0.7);
+}
+.leftH2 span{
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: radial-gradient(#70c2f4,#3a8dc1, #035384, #4696c7,#83d1f5);
+    border-radius: 50%;
+}
+.span1{
+    margin-right: 10px;
+}
+.span2{
+    margin-left: 12px;
+}
+
+/* 功能列表树状菜单 */
+	.tree1 {padding: 5px 0px 0px 15px;width: 140px;}
+    .tree1 li input{position: absolute;left: 0;margin-left: 0;opacity: 0;z-index: 2;cursor: pointer;height: 1em;width:1em;top: 0;}  
+    .tree1 input + ol{display: none;}  
+    .tree1 li label {cursor: pointer;display: block;padding-left: 17px;}  
+    .tree1 input:checked + ol {margin: -22px 0 0 -44px;padding:22px 0 0 44px;height: auto;display: block;}  
+    .tree1 input:checked + ol > li {padding: 5px 0px 0px 0px;height: auto;} 
+.tree1 img{
+	position:relative;
+	top:4px;
+	left:-4px;
+}
+.bb{
+	margin-left: 20px;
+}

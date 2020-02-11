@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+
+<title>德卡管理系统</title>
+<link type="text/css" rel="stylesheet" href="../../css/style.css" />
+<link type="text/css" rel="stylesheet" href="../../css/public.css" />
+<link type="text/css" rel="stylesheet" href="../../css/staff.css" />
+<link rel="stylesheet" href="../../css/AjaxPage.css" type="text/css" />
+<link rel="stylesheet" href="../../css/bomb_box.css" type="text/css" />
+<link rel="stylesheet" href="../../css/alert.css" type="text/css"></link>
+<script type="text/javascript" src="../../js/jquery.uploadify.js"></script>
+</script></head>
+<body>
+
+	<section class="publicMian ">
+		<div class="right">
+			<div class="location">
+				<strong>你现在所在的位置是:</strong> <span>人员高级管理页面</span>
+			</div>
+			<div class="search">
+				<form method="get" action="list.html">
+					<span>账户名称：</span> <input id="StaffName" placeholder="默认全部"
+						name="StaffName" type="text" value=""> <span>职位：</span> <select
+						name="Position" id="pos">
+						<option value="0">所有职位</option>
+					</select> <input value="查 询" type="button" id="searchbutton"
+						onclick="checkfind()"> <a id="aaa"  href="add.html?fid=3&rid=3">添加人员</a>
+				</form>
+			</div>
+			<!--供应商操作表格-->
+			<table class="providerTable" id="table" cellpadding="0"
+				cellspacing="0">
+				<tr class="firstTr">
+					<th width="10%">编号</th>
+					<th width="10%">账户</th>
+					<th width="10%">职位</th>
+					<th width="20%">发行员</th>
+					<th name="delc" width="30%">操作</th>
+				</tr>
+			</table>
+			<div class="page-bar">
+				<div id="pager" class="badoo"></div>
+				<span class="page-go-form"><label>跳转至</label> <input
+					type="text" name="inputPage" id="inputPage" class="page-key" />页
+					<button type="button" class="page-btn"
+						onclick='toPage(document.getElementById("inputPage").value)'>GO</button>
+				</span>
+			</div>
+
+		</div>
+	</section>
+	<div id="alert" class="alert">
+    	<span id="mas" class="mas"></span><br />
+        <span class="line">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+        <p id="info" class="info"></p>
+        <button id="but1" onclick="hide4()" class="but1">确认</button><button id="but2"  onclick="hide()" class="but2">取消</button>
+    </div>
+    	<div id="a" class="a">
+    </div>
+</body>
+<script type="text/javascript" src="../../js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../../js/Page.js"></script>
+<script type="text/javascript" src="../../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../../ajaxJs/staffsList.js"></script>
+<script type="text/javascript" src="../../js/alert.js"></script>
+<script type="text/javascript" src="../../ajaxJs/staffsDispaly.js">
+</script>
+</html>

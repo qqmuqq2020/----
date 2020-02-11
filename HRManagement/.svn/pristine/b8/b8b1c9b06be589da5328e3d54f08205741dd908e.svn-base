@@ -1,0 +1,203 @@
+package hr.manage.dao.CwgonRecord;
+
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+
+import org.springframework.stereotype.Component;
+
+import util.Page;
+
+
+import com.mysql.jdbc.Connection;
+
+import hr.manage.entity.CwgonRecord;
+import hr.manage.filter.JDBC;
+
+
+@Component
+public class CwgonRecordDao {
+	
+	 JDBC jdbc = new JDBC();
+	//创建连接接
+	
+	
+	//发行员
+	public Page<CwgonRecord> getRecordlistPageByfxy( int index,String checkstatus,String book,String pub,String  list1,String snnumber,Integer psid){
+		 Connection connection = jdbc.getConnection();
+		Page<CwgonRecord> page = new Page<CwgonRecord>();
+		List<CwgonRecord> list = new ArrayList<CwgonRecord>();
+		int count=0;	    
+		try {
+			CallableStatement st= connection.prepareCall("{CALL sp_page(?,?,?,?,'order by id desc')}");
+			st.setObject(1, index);
+			st.setObject(2, 30);
+			st.setObject(3, "*");
+			
+				if(checkstatus==null||checkstatus.equals("")){
+					st.setObject(4, "view_onrecord where name like '%"+book+"%' and userName like '%"+pub+"%' and createby in ("+list1+")");
+				}else{
+					st.setObject(4, "view_onrecord WHERE  NAME LIKE '%"+book+"%' and userName like '%"+pub+"%' AND checkstatus="+checkstatus+" AND checkstatus="+checkstatus+" and createby in ("+list1+")");
+				}
+			
+			
+			ResultSet rst =st.executeQuery();
+			
+			while(rst.next()){
+				CwgonRecord  record = new CwgonRecord();
+				record.setId(rst.getInt("id"));
+				record.setBid(rst.getInt("bid"));
+				record.setUid(rst.getInt("uid"));
+				record.setCreateBy(rst.getInt("createBy"));
+				
+				record.setCreationDate(rst.getDate("creationDate"));
+				record.setRecordNumber(rst.getString("recordNumber"));
+				record.setOrderNumber(rst.getString("orderNumber"));
+			
+				//关联子表字段
+				record.setNumber(rst.getString("number"));
+				record.setName(rst.getString("name"));
+				record.setPrice(rst.getDouble("price"));
+				record.setUserName(rst.getString("userName"));
+				record.setStaffName(rst.getString("staffName"));
+				record.setCheckstatus(rst.getInt("checkstatus"));
+				record.setRemainingTime(rst.getInt("remainingTime"));
+				record.setResidueNumber(rst.getInt("residueNumber"));
+				record.setPsid(psid);
+				
+				int i=rst.getInt("remainingTime");
+				if(i==0&&rst.getInt("checkstatus")!=3){
+					record.setRemainingTime(0);
+				}else if(rst.getInt("residueNumber")==2){
+					int j=120+i;
+					record.setRemainingTime(j);
+				}else if(rst.getInt("residueNumber")==1){
+					int j=240+i;
+					record.setRemainingTime(j);
+				}else if(rst.getInt("residueNumber")==0){
+					int j=360+i;
+					record.setRemainingTime(j);
+				}
+				list.add(record);
+			}
+			System.out.println(list.size());
+			
+			if(st.getMoreResults()==true){
+				rst=st.getResultSet();
+				if(rst.next()){
+					count = rst.getInt(1);
+				}
+				System.out.println(count);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		page.setGetlist(list);
+		page.setCount(count);
+		page.setCurrentPage(index);
+		page.setPageCount(count, 30);
+		page.setClike(checkstatus);
+		page.setLike(book);
+		page.setPsid(psid);
+		page.setPub(pub);
+		page.setSnnumber(snnumber);
+		jdbc.Close();
+		return page;
+	}
+	
+	//超级管理员，馆藏员
+	public Page<CwgonRecord> getRecordBystatus( int index,String checkstatus,String book,String pub,Integer uid,Integer psid){
+		 Connection connection = jdbc.getConnection();
+		Page<CwgonRecord> page = new Page<CwgonRecord>();
+		List<CwgonRecord> list = new ArrayList<CwgonRecord>();
+		int count=0;	    
+		try {
+			CallableStatement st= connection.prepareCall("{CALL sp_page(?,?,?,?,'order by id desc')}");
+			st.setObject(1, index);
+			st.setObject(2, 30);
+			st.setObject(3, "*");
+			if(uid==0){
+				if(checkstatus==null||checkstatus.equals("")){
+					st.setObject(4, "view_onrecord where name like '%"+book+"%' and userName like '%"+pub+"%'");
+				}else{
+					st.setObject(4, "view_onrecord WHERE  NAME LIKE '%"+book+"%' and userName like '%"+pub+"%' AND checkstatus="+checkstatus);
+				}
+			}else{
+				if(checkstatus==null||checkstatus.equals("")){
+					st.setObject(4, "view_onrecord where name like '%"+book+"%' and userName like '%"+pub+"%' and createby="+uid);
+				}else{
+					st.setObject(4, "view_onrecord WHERE  NAME LIKE '%"+book+"%' and userName like '%"+pub+"%' AND checkstatus="+checkstatus+" and createby="+uid);
+				}
+			}
+			
+			ResultSet rst =st.executeQuery();
+			
+			while(rst.next()){
+				CwgonRecord  record = new CwgonRecord();
+				record.setId(rst.getInt("id"));
+				record.setBid(rst.getInt("bid"));
+				record.setUid(rst.getInt("uid"));
+				record.setCreateBy(rst.getInt("createBy"));
+				
+				record.setCreationDate(rst.getDate("creationDate"));
+				record.setRecordNumber(rst.getString("recordNumber"));
+				record.setOrderNumber(rst.getString("orderNumber"));
+				
+				//关联子表字段
+				record.setNumber(rst.getString("number"));
+				record.setName(rst.getString("name"));
+				record.setPrice(rst.getDouble("price"));
+				record.setUserName(rst.getString("userName"));
+				record.setStaffName(rst.getString("staffName"));
+				record.setCheckstatus(rst.getInt("checkstatus"));
+				record.setResidueNumber(rst.getInt("residueNumber"));
+				record.setPsid(psid);
+				int i=rst.getInt("remainingTime");
+				if(i==0&&rst.getInt("checkstatus")!=3){
+					record.setRemainingTime(0);
+				}else if(rst.getInt("residueNumber")==2){
+					int j=120+i;
+					record.setRemainingTime(j);
+				}else if(rst.getInt("residueNumber")==1){
+					int j=240+i;
+					record.setRemainingTime(j);
+				}else if(rst.getInt("residueNumber")==0){
+					int j=360+i;
+					record.setRemainingTime(j);
+				}
+				
+				
+				list.add(record);
+			}
+			System.out.println(list.size());
+			
+			if(st.getMoreResults()==true){
+				rst=st.getResultSet();
+				if(rst.next()){
+					count = rst.getInt(1);
+				}
+				System.out.println(count);
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		page.setGetlist(list);
+		page.setCount(count);
+		page.setCurrentPage(index);
+		page.setPageCount(count, 30);
+		page.setClike(checkstatus);
+		page.setLike(book);
+		page.setPub(pub);
+		page.setPsid(psid);
+		
+		jdbc.Close();
+		
+		return page;
+	}
+}

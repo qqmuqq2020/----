@@ -1,0 +1,153 @@
+package hr.manage.entity;
+
+
+
+
+public class Staffs{
+    
+	private Integer id;
+	private String staffID;
+	private String staffName;
+	private String staffPassword;
+	private Integer positionID;
+	private String birthday;
+	private String picture;
+	private String nowAddress;
+	private String idCardNo;
+	private String contactWay;
+	private Integer sectionID;
+	private String icID;
+	private String gid;
+	private String positionName;
+	private String sectionName;
+	private String ready2;
+	
+	
+	
+	public String getReady2() {
+		return ready2;
+	}
+	public void setReady2(String ready2) {
+		this.ready2 = ready2;
+	}
+	public String getStaffID() {
+		return staffID;
+	}
+	public void setStaffID(String staffID) {
+		this.staffID = staffID;
+	}
+	public String getStaffName() {
+		return staffName;
+	}
+	public void setStaffName(String staffName) {
+		this.staffName = staffName;
+	}
+	public String getStaffPassword() {
+		return staffPassword;
+	}
+	public void setStaffPassword(String staffPassword) {
+		this.staffPassword = staffPassword;
+	}
+	public Integer getPositionID() {
+		return positionID;
+	}
+	public void setPositionID(Integer positionID) {
+		this.positionID = positionID;
+	}
+	public String getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
+	}
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
+	public String getNowAddress() {
+		return nowAddress;
+	}
+	public void setNowAddress(String nowAddress) {
+		this.nowAddress = nowAddress;
+	}
+	public String getIdCardNo() {
+		return idCardNo;
+	}
+	public void setIdCardNo(String idCardNo) {
+		this.idCardNo = idCardNo;
+	}
+	public String getContactWay() {
+		return contactWay;
+	}
+	public void setContactWay(String contactWay) {
+		this.contactWay = contactWay;
+	}
+	public Integer getSectionID() {
+		return sectionID;
+	}
+	public void setSectionID(Integer sectionID) {
+		this.sectionID = sectionID;
+	}
+	public String getIcID() {
+		return icID;
+	}
+	public void setIcID(String icID) {
+		this.icID = icID;
+	}
+	public String getGid() {
+		return gid;
+	}
+	public void setGid(String gid) {
+		this.gid = gid;
+	}
+	public String getPositionName() {
+		return positionName;
+	}
+	public void setPositionName(String positionName) {
+		this.positionName = positionName;
+	}
+	public String getSectionName() {
+		return sectionName;
+	}
+	public void setSectionName(String sectionName) {
+		this.sectionName = sectionName;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Staffs(String staffID, String staffName, String staffPassword,
+			Integer positionID, String birthday, String picture,
+			String nowAddress, String idCardNo, String contactWay,
+			Integer sectionID, String icID, String gid, String positionName,
+			String sectionName) {
+		super();
+		this.staffID = staffID;
+		this.staffName = staffName;
+		this.staffPassword = staffPassword;
+		this.positionID = positionID;
+		this.birthday = birthday;
+		this.picture = picture;
+		this.nowAddress = nowAddress;
+		this.idCardNo = idCardNo;
+		this.contactWay = contactWay;
+		this.sectionID = sectionID;
+		this.icID = icID;
+		this.gid = gid;
+		this.positionName = positionName;
+		this.sectionName = sectionName;
+	}
+	public Staffs() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	
+	
+	
+}

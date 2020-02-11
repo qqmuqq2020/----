@@ -1,0 +1,76 @@
+@charset "utf-8";
+<style>
+input,
+fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+}
+html {
+  font-size: 62.5%;
+  line-height: 1.0;
+}
+
+body, h1, h2, h3, h4, h5, h6, label, button, input, select, textarea, li, a, strong, i, span, th, td {
+  font-size: 1.6rem;
+  font-weight: 300;
+}
+
+body {
+  background-color:#4288C1;
+}
+
+.flex-c-c {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 45rem;
+  justify-content: center;
+}
+
+.ui-field,
+.ui-button {
+  border-radius: 0.7rem;
+  height: 3.5rem;
+  width: 25rem;
+}
+.ui-field--hidden,
+.ui-button--hidden {
+  height: 0;
+  margin: 0;
+}
+
+.select__list {
+  display: inline-flex;
+  font-size:30px;
+  font-weight:600;
+  margin-bottom: 2rem;
+}
+
+
+input {
+  background-color: #fff;
+  margin: .9rem 0;
+  text-align: center;
+}
+
+#ss{
+  background:#FC3;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 500;
+  margin: .5rem 0;
+  text-transform: capitalize;
+  -webkit-transition: background 300ms;
+  transition: background 300ms;
+}
+#ss:hover {
+  background:#F00;
+}
+button.--usr-new::before {
+  content: "登录";
+}
+</style>
+

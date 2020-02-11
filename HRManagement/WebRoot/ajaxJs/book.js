@@ -1,0 +1,224 @@
+var fid = 4;
+var xfid=8;
+var str;// 拼接字符串
+var total;// 分页用的总数 查询出数量
+var pageindex;// 分页用的页码 获取当前页
+var PositionID;// 所属职位
+
+//导出
+function checkfind() {
+	var url2 = "/HRManagement/hrm/book/demo?fid="+fid;
+	
+	//
+	//window.location = url2;
+	var url = url2;
+	var xhr = new XMLHttpRequest();
+	loadDiv();
+	xhr.open('GET', url, true); // Ҳ    ʹ  POST  ʽ    ݽӿ 
+	xhr.responseType = "blob"; //         blob
+	xhr.onreadystatechange = function() {
+		if(xhr.readyState == 3) {
+
+		}
+		if(xhr.readyState == 4) {
+
+		}
+	};
+	
+	xhr.onload = function() {
+
+		//        
+		if(this.status === 200) {
+			loadExit();
+
+			//     200
+			var blob = this.response;
+			// ת    ɣ     һ  a  ǩ        
+			var a = document.createElement('a');
+			a.download = '图书管理.xls';
+			a.href = window.URL.createObjectURL(blob);
+			$("body").append(a); //  ޸ firefox   ޷     click
+			a.click();
+			$(a).remove();
+
+		}
+	};
+	//     ajax    
+	xhr.send()
+	
+}
+
+$(function(){
+	
+	$.ajax({
+	    url:"/HRManagement/hrm/book/selepsid",
+	    type:"post",
+	    data: {fid:fid},
+	    success:function(data){
+		    	if(data!=0){
+		    		$("#bookremote").remove()
+		    	}
+		    	
+	    	}
+	    })
+	
+	
+})
+
+
+
+
+// pageMe.js 使用方法
+var app = angular.module('myApp', []);
+
+	var index=1;
+	app.controller('siteCtrl', function($scope, $http) {
+		$scope.del=function(id){
+			if (confirm("确认删除吗")) {
+				$.ajax({
+					url: "/HRManagement/hrm/book/deletebook",
+					type: "post",
+					data: {id: id,fid:xfid},
+					//根据servlet传回的数据对结果进行判断
+					success: function (data) {
+
+						if (data > 0) {
+							alert("删除成功");
+						}
+						if (data == 0) {
+							alert("该图书已备案，不能删除")
+						}
+							$http({
+								method: 'post',
+								url: '/HRManagement/hrm/book/find',
+						        data:$.param({index:index,like:$("#sn11").val(),clike:$("#snbook").val(),pub:$("#snauth").val(),snnumber:$("#snnumber").val(),fid:fid}),
+						        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+							}).then(function successCallback(response) {
+								$scope.names = response.data.getlist;
+								// 加载list页面
+								$scope.Page(response.data);
+
+							}, function errorCallback(response) {
+								// 请求失败执行代码
+							});
+					}
+				});
+			}
+		};
+				
+		//跳转到修改页面
+		$scope.updateBook=function(id){
+			window.location.href = "/HRManagement/manage/book/edit.html?fid="+xfid+"&id="+id;
+			};
+
+
+		//查询	
+		$scope.findByText=function(){
+			index=1;
+			$http({
+		        method: 'POST',
+		        url: '/HRManagement/hrm/book/find',
+		        data:$.param({index:index,like:$("#sn11").val(),clike:$("#snbook").val(),pub:$("#snauth").val(),snnumber:$("#snnumber").val(),fid:fid}),
+		        headers: {'Content-Type': 'application/x-www-form-urlencoded'}	
+		    }).then(function successCallback(response) {
+		            $scope.names = response.data.getlist;
+		         
+		            // 加载list页面
+				  $scope.Page(response.data);
+		            
+		        }, function errorCallback(response) {
+		            // 请求失败执行代码
+		    });	
+		}
+			
+		$scope.bookAdd=function(){
+		    $.ajax({
+		        url: '/HRManagement/hrm/book/addbook',
+		        type: 'POST',
+		        data: {
+		            name:$("#name").val(),
+		            serialNumber:$("#serialNumber").val(),
+		            publisher:$("#publisher").val(),
+		            author:$("#author").val(),
+		            total:$("#total").val(),
+		            price:$("#price").val(),
+		            detail:$("#detail").val(),
+		            fid:fid
+		        },
+		        success: function (data) {
+		            Number(data)
+		            if (data > 0) {
+		                window.location.href = "/HRManagement/manage/book/book.html?fid="+fid;
+		                show("提示", "添加成功");
+		                }else {
+		                show("提示", "添加失败");
+		                window.location="/HRManagement/manage/book/book.html?fid="+fid;
+		            }
+		        },
+		        error:function () {
+		            alert("添加错误！");
+		        }
+		    })
+		};
+
+		
+		
+		$scope.Page=function(obj){
+
+			 $("#page").paging({
+			        pageNum: index, // 当前页面
+			        totalNum: obj.pageCount, // 总页码
+			        totalList: obj.count, // 记录总数量
+			        like:obj.like,
+			        clike:obj.like,
+			        pub:obj.pub,
+			        snnumber:obj.snnumber,
+			        callback: function (num) { //回调函数
+			          index=num
+			          $http({
+			  	        method: 'POST',
+			  	        url: '/HRManagement/hrm/book/find',
+				        data:$.param({index:index,like:$("#sn11").val(),clike:$("#snbook").val(),pub:$("#snauth").val(),snnumber:$("#snnumber").val(),fid:fid}),
+			  	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}	
+			  	    }).then(function successCallback(response) {
+			  	            $scope.names = response.data.getlist;
+			  	         
+			  	            // 加载list页面
+			  			  $scope.Page(response.data);
+			  	            
+			  	        }, function errorCallback(response) {
+			  	        	
+			  	            // 请求失败执行代码
+			  	    });
+			  	  
+			          
+			          
+			            }
+	            })
+		
+		}
+		
+	    $http({
+	        method: 'POST',
+	        url: '/HRManagement/hrm/book/find',
+	        data:$.param({index:index,like:$("#sn11").val(),clike:$("#snbook").val(),pub:$("#snauth").val(),snnumber:$("#snnumber").val(),fid:fid}),
+	        headers: {'Content-Type': 'application/x-www-form-urlencoded'}	
+	    }).then(function successCallback(response) {
+	    	
+	            $scope.names = response.data.getlist;
+	         
+	            // 加载list页面
+			  $scope.Page(response.data);
+	            
+	        }, function errorCallback(response) {
+
+	            // 请求失败执行代码
+	    });
+	  
+});
+	
+	
+
+
+
+

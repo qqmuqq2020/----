@@ -1,0 +1,12 @@
+$(function(){
+	debugger;
+	if($.cookie('keypid')==0||$.cookie('keypid')==2||$.cookie('keypid')==3){
+		$("td[name='delc']").removeAttr('display');
+		$("th[name='delc']").removeAttr('display');
+		$("a[name='delc']").removeAttr('display');
+	}else{
+		$("td[name='delc']").css('display','none');
+		$("th[name='delc']").css('display','none');
+		$("a[name='delc']").css('display','none');
+	}
+})

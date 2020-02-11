@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    
+   <!-- 日志文件 -->
+	<settings>
+       <setting name="logImpl" value="Log4J"/>		
+   </settings> 
+   <!-- 设置别名 -->
+	<typeAliases>
+		<typeAlias type="hr.manage.entity.Staffs" alias="staffs"/>		
+	</typeAliases>
+	
+	<!-- 读取mapper文件 -->
+<!--     <mappers>
+        <mapper resource="com/bdqn/dao/bookMapper.xml"/>
+        <mapper resource="com/bdqn/dao/userLogin.xml"/>
+    </mappers> -->
+</configuration>

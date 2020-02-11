@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+
+<title>备案管理系统</title>
+<link type="text/css" rel="stylesheet" href="../../css/style.css" />
+<link type="text/css" rel="stylesheet" href="../../css/public.css" />
+<link type="text/css" rel="stylesheet" href="../../css/staff.css" />
+<link rel="stylesheet" href="../../css/AjaxPage.css" type="text/css" />
+<link rel="stylesheet" href="../../css/bomb_box.css" type="text/css" />
+<link rel="stylesheet" href="../../css/alert.css" type="text/css"></link>
+<script type="text/javascript" src="../../js/jquery-1.9.1.js"></script>
+<script>
+		
+
+
+</script>
+<script type="text/javascript" src="../../css/loadcss/download/loadDiv.js"></script>
+<script type="text/javascript" src="../../css/loadcss/download/modernizr-2.8.2.js"></script>
+<link rel="stylesheet" href="../../css/loadcss/download/load4.css" type="text/css"></link></head>
+<body>
+
+	<section class="publicMian ">
+		<div class="right" ng-app="myApp" ng-controller="siteCtrl">
+			<div class="location">
+				<strong>你现在所在的位置是:</strong> <span>采薇阁牡丹发行备案系统</span>
+			</div>
+			<div class="search">
+				<form method="get" action="list.html"  >
+					<span>书名：</span> <input id="StaffName" placeholder="默认全部"
+						name="StaffName" type="text" value="">
+						<span>客户：</span> <input id="client" placeholder="默认全部"
+						type="text" value="">
+						
+						 <span>成交状态：</span> 
+						<select name="Position" id="pos">
+					<!-- 	审核状态，1.创建。2.拒绝。3.审核通过。4.驳回。5.终止。6.完成。7逾期 -->
+							<option value="">所有状态</option>
+							<option value="1">创建</option>
+							<option value="2">拒绝</option>
+							<option value="3">审核通过</option>
+							<option value="4">驳回</option>
+							<option value="5">中止</option>
+							<option value="6">完成</option>
+							<option value="7">逾期</option>
+						</select>
+						 <span class="tds1">备案分组：</span> 
+						<select name="Position" id="ppos" class="tds1">
+							<option value="1">我的备案</option>
+							<option value="2">本组备案</option>
+						</select>
+						
+						<input value="查 询" type="button" id="searchbutton"
+						ng-click="checkfind()"> 
+						<!--导出备案  -->
+						<input value="导出备案" type="button" onclick="out1()"/> 
+						
+						<!--添加备案  -->
+						<a href="/HRManagement/manage/test/add.html?fid=6" id="sln">添加备案</a>
+				</form>
+			</div>
+			<!--供应商操作表格-->
+			<table class="providerTable" id="table" cellpadding="0" class="wrap_input_box"
+				cellspacing="0" >
+				<tr class="firstTr">
+					<!-- <th width="5%">
+						 <input type="checkbox" id="allChecked" name="selectAll">全选
+					</th> -->
+					<th width="7%">编号</th>
+					<th width="14%">书名</th>
+					<th width="7%">定价</th>
+					<th width="11%">客户</th>
+					<th width="9%">备案人</th>
+				<!-- 	<th width="9%">审核</th> -->
+					<th width="10%">备案编号</th>
+					<th width="10%">订单编号</th>
+					<th width="7%">状态</th>
+					<th width="8%">当前操作</th>
+					<th width="12%">延期</th>
+					<th width="10%">操作</th>
+				</tr>
+				<tr ng-repeat="x in names"  id="box">
+				<!-- 	<td> <input type="checkbox" name="chooseInfo" value="{{ x.id}}"></td> -->
+					<!--图书编号  -->
+					<td>{{ x.number}}</td>
+					<!--图书名  -->
+					<td>{{ x.name}}</td>
+					<!--图书价格  -->
+					<td>{{ x.price}}</td>
+					<!--客户  -->
+					<td>{{ x.userName}}</td>
+					<!--创建人  -->
+					<td>{{ x.staffName}}</td>
+					<!-- 审核情况 -->
+					<!-- 
+					<td ng-if="x.checkstatus>2">
+						通过
+					</td>
+					<td ng-if="x.checkstatus==2">
+						拒绝
+					</td> -->
+					<!--备案编号  -->
+					
+					<td >
+					{{ x.recordNumber}}
+					</td>
+					<!--订单编号  -->
+					<td >{{ x.orderNumber}}</td>
+					<!--状态  -->
+				<!-- 	审核状态，1.创建。2.拒绝。3.审核通过。4.驳回。5.终止。6.完成。7逾期 -->
+					<td ng-if="x.checkstatus==1">创建</td>
+					<td ng-if="x.checkstatus==2">拒绝</td>
+					<td ng-if="x.checkstatus==3">审核通过</td>
+					<td ng-if="x.checkstatus==4">驳回</td>
+					<td ng-if="x.checkstatus==5">终止</td>
+					<td ng-if="x.checkstatus==6">完成</td>
+					<td ng-if="x.checkstatus==7">逾期</td>
+					
+					<!--手动终止状态  -->
+					<td ng-if="x.psid!=3&&x.checkstatus==1">
+					
+						<input type="button" value="同意" class="selaca" ng-click="consent(x.id)"/>
+						<input type="button" value="拒绝" class="selacb" ng-click="refust(x.id)"/>
+					</td>
+					<td ng-if="x.psid==3&&x.checkstatus==1">
+						等待审核
+						
+					</td>
+					<td ng-if="x.checkstatus==3">
+						<input type="button" id="out1"  value ="点击中止" ng-click="out(x.id)"/>
+					</td>
+					<td ng-if="x.checkstatus>3||x.checkstatus==2">
+						--
+					</td>
+					
+					
+					
+     				 <!--剩余时间，延期  -->
+     				 <!-- ng-if="x.residueNumber>0&&x.remainingTime>0" -->
+					<td ng-if="x.checkstatus==3&&x.residueNumber!=0" >
+					剩余{{ x.remainingTime}}天  可延期{{ x.residueNumber}}次
+						
+							<input type="button" id="delay" value="点击延期"  ng-click="delay(x.id,x.residueNumber)"></input>
+						
+					</td>
+					<td ng-if="x.checkstatus==3&&x.residueNumber==0&&x.remainingTime!=0">
+					剩余{{ x.remainingTime}}天  可延期{{ x.residueNumber}}次
+						
+					</td>
+					<td ng-if="x.checkstatus==3&&x.residueNumber==0&&x.remainingTime==0">
+						--
+						
+					</td>
+					<td ng-if="x.checkstatus!=3" >
+     				 		--
+     				 </td>
+     				 
+					<!--删除  -->
+					<td><span><a ref="#" ng-click="del(x.id);">
+						<img src='../../images/schu.png' alt='删除' title='删除'/></a>
+						</span>
+						</td>
+						<input type="hidden" id="psid" value="{{ x.psid}}"> 
+					</tr>
+				
+			</table>
+			
+			<!--分页  -->
+				<div id="page" class="page_div">
+					
+				</div>	
+			
+		</div>
+	</section>
+	<div id="alert" class="alert">
+    	<span id="mas" class="mas"></span><br />
+        <span class="line">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+        <p id="info" class="info"></p>
+        <button id="but1" onclick="hide4()" class="but1">确认</button><button id="but2"  onclick="hide4()" class="but2">取消</button>
+    </div>
+    	<div id="a" class="a">
+    </div>
+</body>
+
+
+
+<script type="text/javascript" src="../../js/pageMe.js"></script>
+<script type="text/javascript" src="../../js/angular.min.js"></script>
+<script type="text/javascript" src="../../ajaxJs/onRecodlist.js"></script>
+<script type="text/javascript" src="../../js/choose.js"></script>
+<script type="text/javascript" src="../../js/alert.js"></script>
+</html>

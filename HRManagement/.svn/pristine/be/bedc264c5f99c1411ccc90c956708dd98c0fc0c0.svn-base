@@ -1,0 +1,20 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>项目部签到系统</title>
+</head> 
+<frameset rows="128px,*,8%" cols="*" frameborder="yes" border="0" framespacing="0" name="login" >
+  
+  	   	<frame src="top.html"/>
+    <frameset cols="12.5%,*" >
+    <frame src="lift.html"/>
+   <frame src="right.html" name="myframe"/> 
+   </frameset>
+    	<frame src="bottom.html"/>
+</frameset>	
+
+<body  style="background: #4287c2;">
+</body>
+</html>
+

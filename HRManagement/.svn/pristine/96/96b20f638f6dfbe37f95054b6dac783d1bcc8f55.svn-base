@@ -1,0 +1,114 @@
+var fid = 4;
+var index = 1;
+var xfid=8;
+//添加
+function bookAdd(){
+    $.ajax({
+        url: '/HRManagement/hrm/book/addbook',
+        type: 'POST',
+        data: {
+            name:$("#name").val(),
+            serialNumber:$("#serialNumber").val(),
+            publisher:$("#publisher").val(),
+            author:$("#author").val(),
+            total:$("#total").val(),
+            price:$("#price").val(),
+            detail:$("#detail").val(),
+            fid:xfid
+        },
+        success: function (data) {
+      
+            if (data > 0) {
+                $.ajax({
+                    url:"/HRManagement/hrm/book/find",
+                    type:"post",
+                    data:{index:index,fid:fid},
+                    success:function () {
+                    	alert("添加成功");
+                        window.location.href = "/HRManagement/manage/book/book.html?fid="+fid;
+                  
+                    }
+                })
+                window.location="/HRManagement/manage/book/book.html?fid="+fid;
+            } else {
+            	alert("添加失败");
+                window.location="/HRManagement/manage/book/book.html?fid="+fid;
+            }
+        },
+        error:function () {
+            alert("添加错误！");
+        }
+    })
+}
+//返回事件
+function add_list() {
+	$("#alert").hide();
+	$("#a").hide();
+	window.location = "book.html?fid=" + fid;
+};
+
+
+//效验书名
+function checkName() {
+	var name = $("#name").val();
+	if (name == "") {
+		$("#b").text("书名必填");
+		flag = false;
+	} else {
+		$("#b").text("正确");
+		flag = true;
+	}
+	return flag;
+}
+//效验书名
+function checkserialNumber() {
+	var serialNumber = $("#serialNumber").val();
+	if (serialNumber == "") {
+		$("#c").text("编号必填");
+		flag = false;
+	} else {
+		$("#c").text("正确");
+		flag = true;
+	}
+	return flag;
+}
+//效验书名
+function checkpublisher() {
+	var publisher = $("#publisher").val();
+	if (publisher == "") {
+		$("#d").text("出版社必填");
+		flag = false;
+	} else {
+		$("#d").text("正确");
+		flag = true;
+	}
+	return flag;
+}
+
+function checkauthor() {
+	var author = $("#author").val();
+	if (author == "") {
+		$("#e").text("作者必填");
+		flag = false;
+	} else {
+		$("#e").text("正确");
+		flag = true;
+	}
+	return flag;
+}
+
+function checkdetail() {
+	var author = $("#detail").val();
+	if (detail == "") {
+		$("#f").text("备注必填");
+		flag = false;
+	} else {
+		$("#f").text("正确");
+		flag = true;
+	}
+	return flag;
+}
+//判断编号
+function fanhuiBook() {
+    window.location="/HRManagement/manage/book/book.html?fid="+fid;
+}

@@ -1,0 +1,32 @@
+@charset "utf-8";
+.mormingtimetop {
+	display: inline-block;
+	font-size: 20px;
+	padding: 5px;
+	text-align: center;
+	width: 50px;
+}
+
+.mormingtimebelow {
+	display: inline-block;
+	font-size: 20px;
+	padding: 5px;
+	text-align: center;
+	width: 50px;
+}
+
+.afternoontimetop {
+	display: inline-block;
+	font-size: 20px;
+	padding: 5px;
+	text-align: center;
+	width: 50px;
+}
+
+.afternoontimebelow {
+	display: inline-block;
+	font-size: 20px;
+	padding: 5px;
+	text-align: center;
+	width: 50px;
+}

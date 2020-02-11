@@ -1,0 +1,33 @@
+/*底部*/
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-size: 12px;
+}
+.clear:after{
+    content: '';
+    display: block;
+    clear: both;
+}
+a{
+    text-decoration: none;
+    out-line: none;
+    color: #000;
+	
+}
+li{
+    list-style: none;
+}
+.footer{
+	clear:both;
+	margin-top:0px;
+	padding-top:0px;
+    width:100%;
+    height:51px;
+	font-size: 25px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+}

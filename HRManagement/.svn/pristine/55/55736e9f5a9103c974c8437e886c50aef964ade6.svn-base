@@ -1,0 +1,128 @@
+package hr.manage.controller.Test;
+
+import com.alibaba.fastjson.JSONArray;
+import hr.manage.dao.book.BookDao;
+import hr.manage.dao.cwg_client.Cwg_clientDao;
+import hr.manage.dao.cwg_onrecord.Cwg_onrecordDao;
+import hr.manage.entity.CwgBookManager;
+import hr.manage.entity.CwgClient;
+import hr.manage.entity.CwgonRecord;
+import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+
+@Controller
+@RequestMapping(value = "/hrm/test")
+public class GetCocoController {
+
+    @Resource
+    Cwg_clientDao dao;
+
+    @Resource
+    BookDao dao1;
+
+    @Resource
+    Cwg_onrecordDao dao2;
+
+
+    //获取客户列表
+    @RequestMapping(value = "/getCocoList", produces="application/json;charset=utf-8",method=RequestMethod.GET)
+    @ResponseBody
+    public Object getCocoList(HttpSession session){
+    	Integer uid = (Integer)session.getAttribute("uid");
+    	List<CwgClient> cList=dao.getListbyCreate(uid);
+        return JSONArray.toJSONString(cList);
+    }
+    
+    //加载页面获取书名
+    @RequestMapping(value = "/getAllBookList", produces="application/json;charset=utf-8",method=RequestMethod.GET)
+    @ResponseBody
+    public Object getBookList(){
+    
+    	List<CwgBookManager> bookList = dao1.findBookList();
+        return JSONArray.toJSONString(bookList);
+    }    
+    
+
+    //搜索获取书名列表
+    @RequestMapping(value = "/getBookList", produces="application/json;charset=utf-8",method=RequestMethod.GET)
+    @ResponseBody
+    public Object getBookName(@RequestParam("bookName")String str){
+        List<CwgBookManager> bList = dao1.findBookListByString(str);
+
+        return JSONArray.toJSONString(bList);
+    }
+
+    //判断数据库中是否存在备案
+    @RequestMapping(value = "/ifHave", produces="application/json;charset=utf-8",method=RequestMethod.GET)
+    @ResponseBody
+    public Object IfHave(@RequestParam("array")String[] array){
+        String p = getP(array);
+        List<CwgonRecord> RecordList = dao2.findIfhave(p);
+        String erro="";
+        if(RecordList.size()>0)
+        {
+            for (int i = 0; i <RecordList.size() ; i++) {
+
+                erro+=(RecordList.get(i).getUserName()+RecordList.get(i).getName()+"的订单存在，请重新选择! \n ");
+            }
+            System.out.println(erro);
+        }else {
+            erro=null;
+        }
+        return JSONArray.toJSONString(erro);
+    }
+
+    //分割拼接字符串
+    private String getP(String[] array){
+        String pam="";
+        for (int i = 0; i <array.length ; i++) {
+            if (i==0){
+                String[] split = array[i].split("-");
+                pam+=" bid="+split[0]+" and uid="+split[2];
+            }else {
+                String[] split = array[i].split("-");
+                pam+=" or bid="+split[0]+" and uid="+split[2];
+            }
+        }
+        return pam;
+    }
+
+    //数据库中插入数据
+    @RequestMapping(value = "/addRecord", produces="application/json;charset=utf-8",method=RequestMethod.GET)
+    @ResponseBody
+    @Transactional
+    public Object addRecord(@RequestParam("barray")String[] barray, HttpSession session){
+        Integer uid = (Integer)session.getAttribute("uid");
+        List<CwgonRecord> listR = getListR(barray, uid);
+        for (int i = 0; i <listR.size() ; i++) {
+            dao2.addRecord(listR.get(i));
+            //主键ID
+            Integer RID=listR.get(i).getId();
+            String str1=""+RID+",NOW(),1,"+uid;
+            dao2.addRecore_status(str1);
+        }
+        return JSONArray.toJSONString("添加成功！");
+    }
+
+    //获取插入的备份List
+    private List<CwgonRecord> getListR(String[] barray,Integer uid){
+        List<CwgonRecord> listR=new ArrayList<>();
+        for (int i = 1; i <=barray.length ; i++) {
+            CwgonRecord cr=new CwgonRecord();
+            String[] split = barray[i-1].split("-");
+                cr.setBid(Integer.parseInt(split[0]));
+                cr.setUid(Integer.parseInt(split[2]));
+                cr.setCreateBy(uid);
+            listR.add(cr);
+        }
+        return listR;
+    }
+
+
+}

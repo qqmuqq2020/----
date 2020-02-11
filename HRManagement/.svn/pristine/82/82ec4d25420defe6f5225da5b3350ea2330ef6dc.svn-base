@@ -1,0 +1,20 @@
+@charset "utf-8";
+/* 树状菜单 */
+.tree {padding: 5px 0 0 10px;width: 100px;}  
+    .tree li {position: relative;margin-left: -15px;list-style: none;}  
+    .tree li.file{margin-left: -18px !important;}  
+    .tree li.file a{background: url(document.png) 0 0 no-repeat;color: #002446;padding-left: 21px;text-decoration:none;display: block;}  
+    .tree li input{position: absolute;left: 0;margin-left: 0;opacity: 0;z-index: 2;cursor: pointer;height: 1em;width:1em;top: 0;}  
+    .tree input + ol{display: none;}  
+    .tree input + ol > li { height: 0; overflow: hidden; margin-left: -14px !important; padding-left: 1px; }  
+    .tree li label {cursor: pointer;display: block;padding-left: 17px;background: url(toggle-small-expand.png) no-repeat 0px 1px;}  
+    .tree input:checked + ol {background: url(toggle-small.png) 44px 5px no-repeat;margin: -22px 0 0 -44px;padding:27px 0 0 80px;height: auto;display: block;}  
+    .tree input:checked + ol > li { height: auto;} 
+.tree img{
+	position:relative;
+	top:4px;
+	left:-4px;
+}
+#photo{
+	float:right;
+}	 

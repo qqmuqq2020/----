@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link type="text/css" rel="stylesheet" href="../css/bottom.css" />
+</head>
+<style>
+</style>
+<body >
+ <!--底部-->
+ 
+<div class="footer" style="background: #4287c2;">	
+    版权归采薇阁所属
+</div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+﻿.loading{  
+    width:200px;  
+    height:56px;  
+    position: relative;  
+    top:50%;   
+    line-height:56px;  
+    padding-left:60px;  
+    font-size:15px;  
+    background: url(loading.gif) no-repeat 10px 50%;  
+    display:none; 
+    position: absolute; 
+    right: 100px;
+    top:-15px;
+}  
+
+
+.loading1{  
+  	
+     
+
+    font-size:15px;
+      	
+		position: absolute;
+		top:6.5%;
+		padding-left:450px;
+	
+   
+}  

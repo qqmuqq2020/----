@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<META http-equiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT">
+<META http-equiv="Last-Modified" content="Sat, 10 Nov 1997 09:08:07 GMT">
+<META http-equiv="Cache-Control"
+	content="no-store, no-cache, must-revalidate">
+<META http-equiv="Pragma" content="no-cache">
+<meta charset="UTF-8">
+<title></title>
+<link type="text/css" rel="stylesheet" href="../css/lift.css?" +(new Date()).getTime() />
+<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+<script type="text/JavaScript">
+	/* alert($(window.parent.document).find('#frame')[0].src+=$(window.parent.document).find('#frame')[0].src.indexOf("?") !=-1 ? "?" : "&" + (new Date()).getTime()); */
+
+	//将每个路径不一样,防止浏览器缓存页面请求
+	
+	function show()
+	{
+	   $("#frame1").attr("href", "/HRManagement/manage/client/list.html?fid=1");
+	}
+</script>
+</head>
+
+<body style="background: #F2F2F2;">
+	<section class="publicMian ">
+		<div class="left">
+			<h2 class="leftH2">
+				<span class="span1"></span>功能列表 <span></span>
+			</h2>
+			<nav>
+				<!-- <ol class="tree1">
+					<li><label for="folder1"><img src="../images/home.png" style="height:25px;width:25px;"/><a
+							href="/HRManagement/manage/sections/list.html?fid=2&rid=-1"
+							target="myframe" name="myframe" id="frame">部门管理</a>
+					</label></li>
+				</ol> -->
+				<ol class="tree1">
+					<li><label for="folder2"><img src="../images/man.png" style="height:25px;width:25px;"/><a
+							onclick="show();"
+							target="myframe" name="myframe" id="frame1">人员管理</a>
+					</label></li>
+				</ol>
+				<!-- <ol class="tree1">
+					<li><label for="folder3"><img
+							src="../images/table.png" style="height:25px;width:25px;"/>报表管理</label> <input type="checkbox"
+						id="folder3" />
+						<ol>
+							<li class="bb"><label for="subfolder2"><img
+									src="../images/photo.png" style="height:25px;width:25px;"/><a
+									href="/HRManagement/manage/forms/photo.html?fid=1"
+									target="myframe" name="myframe" id="frame2">图形报表</a>
+							</label></li>
+							<li class="bb"><label for="subfolder3"><img
+									src="../images/tab.png" style="height:25px;width:25px;"/><a
+									href="/HRManagement/manage/forms/form.html?fid=1"
+									target="myframe" name="myframe" id="frame3">表格报表</a>
+							</label></li>
+						</ol></li>
+				</ol> -->
+				<ol class="tree1">
+					<li><label for="folder2"><img src="../images/tab.png" style="height:25px;width:25px;"/><a
+							href="/HRManagement/manage/client/list.html?fid=1&rid=-1" target="myframe"
+							name="myframe" id="frame4">客户管理</a>
+					</label></li>
+				</ol>
+				<ol class="tree1">
+					<li><label for="folder2"><img src="../images/home.png" style="height:25px;width:25px;"/><a
+							href="/HRManagement/manage/book/book.html?fid=4&rid=-1" target="myframe"
+							name="myframe" id="frame4">图书管理</a>
+					</label></li>
+				</ol>
+				<ol class="tree1">
+					<li><label for="folder2"><img src="../images/table.png" style="height:25px;width:25px;"/><a
+							href="/HRManagement/manage/financial/financiallist.html?fid=5&rid=-1" target="myframe"
+							name="myframe" id="frame4">财务管理</a>
+					</label></li>
+				</ol>
+				<ol class="tree1">
+					<li><label for="folder2"><img src="../images/set.png" style="height:25px;width:25px;"/><a
+							href="/HRManagement/manage/onRecord/onRecordlist.html?fid=6&rid=-1" target="myframe"
+							name="myframe" id="frame4">备案管理</a>
+					</label></li>
+				</ol>
+				<ol class="tree1">
+					<li><label for="folder2"><img src="../images/set.png" style="height:25px;width:25px;"/><a
+							href="/HRManagement/manage/person/edit.html?fid=7&rid=-1" target="myframe"
+							name="myframe" id="frame4">个人信息</a>
+					</label></li>
+				</ol>
+			</nav>
+		</div>
+	</section>
+</body>
+</html>

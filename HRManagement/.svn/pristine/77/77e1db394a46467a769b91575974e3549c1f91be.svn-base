@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hr.manage.dao.CwgonRecord.CwgonRecordMapper">
+	
+	
+	<!--查询所有  -->
+	<select id="getlist" resultType="hr.manage.entity.CwgonRecord">
+	SELECT id,number,NAME,price,userName,staffName,recordNumber,orderNumber,creationDate,CASE checkstatus 
+		WHEN 1 THEN '创建' WHEN 2 THEN '拒绝' WHEN 3 THEN '审核通过' WHEN 4 THEN '驳回' 
+		WHEN 5 THEN '终止' WHEN 6 THEN '完成' WHEN 7 THEN '逾期'  END 'status'
+		FROM view_onrecord  WHERE NAME LIKE #{book} AND userName like #{client} AND checkstatus=#{status}  ORDER BY id DESC
+		
+	</select>
+	<select id="getlist1" resultType="hr.manage.entity.CwgonRecord">
+	SELECT id,number,NAME,price,userName,staffName,recordNumber,orderNumber,creationDate,CASE checkstatus 
+		WHEN 1 THEN '创建' WHEN 2 THEN '拒绝' WHEN 3 THEN '审核通过' WHEN 4 THEN '驳回' 
+		WHEN 5 THEN '终止' WHEN 6 THEN '完成' WHEN 7 THEN '逾期'  END 'status'
+		FROM view_onrecord   WHERE NAME LIKE #{book} AND userName like #{client}  ORDER BY id DESC
+	</select>
+	<!--查询总备案数  -->
+	<select id="seleCount" resultType="Integer">
+			SELECT count(1)  FROM view_onrecord 
+	</select>
+	
+	<select id="getlistByfx" resultType="hr.manage.entity.CwgonRecord">
+	SELECT id,number,NAME,price,userName,staffName,recordNumber,orderNumber,creationDate,CASE checkstatus 
+		WHEN 1 THEN '创建' WHEN 2 THEN '拒绝' WHEN 3 THEN '审核通过' WHEN 4 THEN '驳回' 
+		WHEN 5 THEN '终止' WHEN 6 THEN '完成' WHEN 7 THEN '逾期'  END 'status'
+		FROM view_onrecord   where createby in (${uid}) ORDER BY id DESC
+
+	</select>
+	
+	<select id="getstaffslist" resultType="String" >
+		SELECT GROUP_CONCAT(id) FROM staffs WHERE  ready2=#{sid}
+	</select>
+	
+	<!--添加备案  -->
+	<insert id="addRecord">
+		insert into cwg_onrecord(bid,uid,createBy,creationDate,)
+		values(#{bid},#{uid},#{createBy},#{creationDate})
+	</insert>
+	<!--删除备案  -->
+	<delete id="delRecord">
+		delete from  cwg_onrecord    where id=#{id}
+	</delete>
+	<delete id="delRecordstatus">
+		delete from  cwg_onrecore_status    where recoreId=#{id}
+	</delete>
+	<delete id="delRecordTime">
+		delete from  cwg_onrecore_times    where recoreId=#{id}
+	</delete>
+	<select id="seleRecord" resultType="Integer" >
+		SELECT COUNT(1) FROM view_onrecord WHERE id=#{id}  AND checkstatus=3
+	</select>
+
+	<!--手动中止  -->
+	<insert id="outRecord">
+		INSERT INTO cwg_onrecore_status(recoreId,checkstatus,creationDate,createBy) VALUES(#{id},5,NOW(),#{uid}) 
+	</insert>
+	<!-- <insert id="outTime">
+		INSERT INTO cwg_onrecore_times(recoreId,creationDate,residueNumber,remainingTime,createBy)
+		 VALUES(#{id},NOW(),0,0)
+	</insert> -->
+	<!--同意审核  -->
+	<insert id="consentRecord">
+		INSERT INTO cwg_onrecore_status(recoreId,checkstatus,creationDate,createBy) VALUES(#{id},3,NOW(),#{uid}) 
+	</insert>
+	<insert id="consentTime">
+		INSERT INTO cwg_onrecore_times(recoreId,creationDate,residueNumber,createBy) 
+		VALUES(#{id},NOW(),2,#{uid}) 
+	</insert>
+	<update id="updateOnRecord">
+		UPDATE cwg_onrecord SET recordNumber=#{baid}   WHERE id=#{id}
+	</update>
+	<!--拒绝审核  -->
+	<insert id="refustRecord">
+		INSERT INTO cwg_onrecore_status(recoreId,checkstatus,creationDate,createBy) VALUES(#{id},2,NOW(),#{uid}) 
+	</insert>
+	<!--延期-->
+	<insert id="residueRecord">
+		update  cwg_onrecore_times set residueNumber=#{residueNumber},modifyDate1=NOW(),createBy=#{uid} 
+		where recoreId=#{id}
+	</insert>
+	<insert id="residueRecord2">
+		update  cwg_onrecore_times set residueNumber=#{residueNumber},modifyDate2=NOW(),createBy=#{uid} 
+		where recoreId=#{id}
+	</insert>
+		
+
+</mapper>

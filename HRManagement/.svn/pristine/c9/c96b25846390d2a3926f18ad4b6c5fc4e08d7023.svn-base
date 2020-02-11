@@ -1,0 +1,4 @@
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://106.13.110.63:3306/cwg_db?characterEncoding=utf8
+jdbc.user=root
+jdbc.password=1qaz!QAZ

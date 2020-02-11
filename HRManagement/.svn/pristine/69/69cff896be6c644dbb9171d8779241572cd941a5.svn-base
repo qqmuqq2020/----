@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>德卡管理系统</title>
+<link rel="stylesheet" href="../../css/style.css" type="text/css"></link>
+<link rel="stylesheet" href="../../css/public.css" type="text/css"></link>
+<link rel="stylesheet" href="../../css/uploadify.css" type="text/css"></link>
+<link rel="stylesheet" href="../../css/bomb_box.css" type="text/css"></link>
+<link rel="stylesheet" href="../../css/alert.css" type="text/css"></link>
+<script type="text/javascript" src="../../js/jquery-3.4.1.js"></script>
+<script type="text/javascript" src="../../js/jquery.cookie.js"></script></head>
+<body style="background-color: #fff">
+
+	<section class="publicMian ">
+	
+		<div class="right">
+			<div class="location">
+				<strong>你现在所在的位置是:</strong> <span>客户高级管理页面 >> 客户添加页面</span>
+			</div>
+			<div class="providerAdd" style="margin-right:-16%;">
+				<form id="staffForm" name="staffForm" method="post">
+					<!--div的class 为error是验证错误，ok是验证成功-->
+				<!-- 	<div id="photo">
+						<img alt="暂无头像" src="" width="100%" height="100%">
+					</div>
+
+			<div id="fileQueue" style="position:relative;margin-left:180px;">
+						<input type="file" name="uploadify" id="uploadify" /> <input
+							type="hidden" nam="fileName" id="fileName" />
+					</div> -->
+					<div id="alert" class="alert">
+    	<span id="mas" class="mas"></span><br />
+        <span class="line">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+        <p id="info" class="info"></p>
+        <button id="but1" onclick="hide()" class="but1">确认</button><button id="but2"  onclick="hide()" class="but2">取消</button>
+    	</div>
+    	<div id="a" class="a">
+    	</div>
+					
+					
+					<div>
+						<label for="StaffName">客户姓名:</label> <input type="text"
+							name="userName" value="" id="sname" onblur="checkName()" /> <font
+							color="red" id="position_err"></font>
+					</div>
+					<div>
+						<label for="StaffName">客户备注:</label> <textarea id="detail" rows="10" cols="50"></textarea> <font
+							color="red" id="position_err"></font>
+					</div>
+					<div style="display:none;">
+						<label for="StaffName">最大添加客户数:</label> <input type="text"
+							name="userName" onkeyup = "value=value.replace(/[^\d]/g,'')" value="20" id="Max1" onblur="checkName()" /></font>
+					</div>
+					<div class="providerAddBtn">
+						<input type="button" name="add" id="add" onclick="save()" value="保存">
+						 <input type="button" id="back" name="back" onclick="backtolist()" value="返回">
+					</div>
+				</form>
+
+			</div>
+		</div>
+
+	</section>
+</body>
+<script type="text/javascript" src="../../js/ClientAdd.js"></script>
+<script type="text/javascript" src="../../js/alert.js"></script>
+</html>
+

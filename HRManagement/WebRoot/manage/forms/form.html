@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title>德卡管理系统</title>
+<link type="text/css" rel="stylesheet" href="../../css/style.css" />
+<link type="text/css" rel="stylesheet" href="../../css/public.css" />
+<link rel="stylesheet" href="../../css/AjaxPage.css" type="text/css"></link>
+<link rel="stylesheet" href="../../css/alert.css" type="text/css"></link>
+</head>
+<body>
+
+	<section class="publicMian ">
+
+		<div class="right">
+			<div class="location">
+				<strong>你现在所在的位置是:</strong> <span>表格报表页面</span>
+			</div>
+			<div class="search">
+				<form>
+					<input value="导出报表" type="button" id="searchbutton" onclick="notnull()"> 
+					<span>开始时间：</span> <input type="text" name="StatTime"
+						id="startTime" class="Wdate" value="本月月初" onclick="WdatePicker({readOnly:true})"
+						required="required" /> <span>结束时间：</span> <input type="text"
+						name="endTime" id="endTime" class="Wdate" value="本月月末"
+						onclick="WdatePicker({readOnly:true})" required="required"/>
+						<span>部门：</span> <select name="Section" id="sec">
+						<option value="0">--请选择--</option>
+					</select><span>姓名：</span>
+					<input name="StaffName" placeholder="默认全部" type="text" value="" id="staffname">
+					  <input value="搜 索"
+						type="button" onclick="sousuo()" id="searchbutton">
+				</form>
+			</div>
+			<!--供应商操作表格-->
+			<table class="providerTable" id="table">
+				<tr class="firstTr">
+					<th width="15%">员工编号</th>
+					<th width="15%">员工姓名</th>
+					<th width="20%">部门名称</th>
+					<th width="30%">打卡时间</th>
+					<th width="20%">打卡类型</th>
+				</tr>
+			</table>
+			<div class="page-bar">
+				<div id="pager" class="badoo"></div>
+				<span class="page-go-form"><label>跳转至</label> <input
+					type="text" name="inputPage" id="inputPage" class="page-key" />页
+					<button type="button" class="page-btn"
+						onclick='toPage(document.getElementById("inputPage").value)'>GO</button>
+				</span>
+			</div>
+		</div>
+	</section>
+	<div id="alert" class="alert">
+    	<span id="mas" class="mas"></span><br />
+        <span class="line">. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .</span>
+        <p id="info" class="info"></p>
+        <button id="but1" onclick="hide3()" class="but1">确认</button><button id="but2"  onclick="hide3()" class="but2">取消</button>
+    </div>
+    	<div id="a" class="a">
+    </div>
+</body>
+<script type="text/javascript" src="../../calendar/WdatePicker.js"></script>
+<script type="text/javascript" src="../../js/Page.js"></script>
+<script type="text/javascript" src="../../js/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="../../ajaxJs/form.js"></script>
+<script type="text/javascript" src="../../js/alert.js"></script>
+</html>

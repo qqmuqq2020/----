@@ -1,0 +1,31 @@
+var fid = 1;
+
+
+
+
+
+function backtolist() {
+	location.href = "list.html?fid=" + fid;
+}// 返回end
+
+function save(){
+	debugger;
+//	alert($("#Max1").val())
+	var mas = "提示";
+	var info = "修改成功！";
+	$.ajax({
+		url:'/HRManagement/hrm/cwg_client/addClient',
+		type:'post',
+		data:{userName:$("#sname").val(),detail:$("#detail").val(),max:$("#Max1").val(),fid:fid},
+		success : function(data){
+			debugger;
+			if (data > 0) {
+				alert("添加成功");
+				window.history.back(-1);
+			} else {
+				alert("添加失败");
+			}
+		}
+	})
+	
+}

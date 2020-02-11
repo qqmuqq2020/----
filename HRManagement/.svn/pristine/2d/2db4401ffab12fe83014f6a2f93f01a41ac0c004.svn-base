@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+<meta charset="UTF-8">
+<title></title>
+
+<link type="text/css" rel="stylesheet" href="../css/top.css" />
+<script type="text/javascript" src="../js/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+	function getName() {
+		$.ajax({
+			url : '/HRManagement/user/getUname',
+			type : 'post',
+			dataType : 'JSON',
+			success : function(data) {
+				$("#name").html(data.uname);
+			}
+		});
+	}
+
+	$(function() {
+		getName();
+	});
+
+	function exit() {
+		$.ajax({
+			url : '/HRManagement/user/exit',
+			type : 'post',
+			data : {
+
+			//id  为 控制层的id  sectionid是 del(sectionid)
+			},
+			success : function(data) {
+			debugger;
+				if (data == "yes") {
+					top.location = '../login.html';
+					
+				}
+			}
+		});
+	};
+
+	function IEDown() {
+		window.open = 'baidu.com';
+	}
+</script>
+</head>
+
+
+
+<body style="background: #4287c2;">
+	<!--头部-->
+	<header class="publicHeader">
+		<div class="topleft">
+			<a href="frame.html" target="_parent"><img
+				src="../images/logo.png" title="系统首页" /><span>采薇阁备案系统</span> </a>
+		</div>
+		<div class="topright">
+			<ul>
+				<li style="padding-top:7px;"><h2>
+						欢迎您,<span id="name"></span>
+					</h2></li>
+				<li style=""><a onclick="exit()" target="_self"><img
+						src="../images/exit.png" class="exit" alt="退出" title="退出"
+						style="height:30px;width:30px;"></img> </a></li>
+			</ul>
+		</div>
+	</header>
+	<!--时间-->
+	
+	<section class="publicTime">
+		<span id="time">2015年1月1日 11:11 星期一</span> <a href=""
+			onclick="window.open('http://www.google.cn/chrome/browser/desktop/index.html')">温馨提示:为了能正常浏览,请使用高版本浏览器!(IE10+)</a>
+	</section>
+	<script type="text/javascript" src="../js/time.js"></script>
+</body>
+</html>
